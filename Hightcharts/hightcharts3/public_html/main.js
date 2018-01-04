@@ -19,7 +19,7 @@ options.chart = {
 };
  
 options.credits = {
-  enabled: false
+  text: '© SNIR Soft Touchard Le Mans'
 };
  
 options.colors = couleurs;
@@ -30,15 +30,23 @@ options.title = {
 };
  
 options.tooltip = {
-  formatter: function() {
-    return "Année : " + this.x + " Prix : " + this.y + " €" ;
-  }
+    
+    shared: true,
+    borderColor: '#4b85b7',
+    backgroundColor: '#edf1c8'
+};
+
+options.legend = {
+    
+    layout: 'horizontal',
+    align: 'center',   
+    backgroundColor: '#FFFFFF'
 };
 
 options.yAxis = [
   {
     title : {
-      text: "Gazoil & Super 95 98 (€)"
+      text: "Gazoil & Super 95 98"
     },
     labels: {
         formatter: function() {
@@ -51,7 +59,7 @@ options.yAxis = [
   },
   {
     title: {
-        text: "Baryl brent ($US)"
+        text: "Baryl brent"
     },
     labels: {
         formatter: function() {

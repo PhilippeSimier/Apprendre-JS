@@ -95,8 +95,6 @@ $.getJSON('prixEssence.json', function(prixEssence) {
     
     $.each(prixEssence, function(annee,prix){
       
-        var theDate = new Date(parseInt(annee),0,1);
-      
         options.series[0].data.push(prix.gazoil);
         options.series[1].data.push(prix.super95);
         options.series[2].data.push(prix.super98);
@@ -105,8 +103,6 @@ $.getJSON('prixEssence.json', function(prixEssence) {
 		  
     });
     
-    console.log(options.xAxis.categories);
-    console.log(options.series[0].data);
-    chart = new Highcharts.Chart(options);
+     chart = new Highcharts.Chart(options);
   
   });

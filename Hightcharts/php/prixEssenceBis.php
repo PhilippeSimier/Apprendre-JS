@@ -22,40 +22,44 @@ function obtenirValeur() {
 	$requete->execute() or die (print_r($requete->errorInfo()));
 	
 	
-    $data2 = array();
-    $data3 = array();
-    $data4 = array();
-	$data5 = array();	
+    $gasoil  = array();
+    $super95 = array();
+    $super98 = array();
+	$brent   = array();	
 	
 	while ($ligne = $requete->fetch()) {
 		
-		
-		array_push($data2, floatval($ligne['gazoil']));
-		array_push($data3, floatval($ligne['super95']));
-		array_push($data4, floatval($ligne['super98']));
-		array_push($data5, floatval($ligne['brent']));
+		array_push($gasoil,  floatval($ligne['gazoil']));
+		array_push($super95, floatval($ligne['super95']));
+		array_push($super98, floatval($ligne['super98']));
+		array_push($brent,   floatval($ligne['brent']));
 				
 	}
 	
 	$valeurs = array();
-	
+	$tooltip[valueSuffix] = " €";
 	
 	$series = array();
-	$serie['name'] = "gazoil"; 		
-	$serie['data']  = $data2;
+	$serie['name'] = "gazoil  (L)"; 
+	$serie['tooltip'] = $tooltip;
+	$serie['data']  = $gasoil;
 	array_push($series, $serie);
 	
-	$serie['name'] = "super95"; 
-	$serie['data']  = $data3;
+	$serie['name'] = "super95 (L)"; 
+	$serie['tooltip'] = $tooltip;
+	$serie['data']  = $super95;
 	array_push($series, $serie);
 	
-	$serie['name'] = "super98"; 
-	$serie['data']  = $data4;
+	$serie['name'] = "super98 (L)";
+	$serie['tooltip'] = $tooltip;	
+	$serie['data']  = $super98;
 	array_push($series, $serie);
 	
-	$serie['name'] = "brent"; 
+	$tooltip[valueSuffix] = " $";
+	$serie['name'] = "brent (Baryl)";
+	$serie['tooltip'] = $tooltip;	
 	$serie['yAxis'] = 1; 
-	$serie['data']  = $data5;
+	$serie['data']  = $brent;
 	array_push($series, $serie);
 	
 	
