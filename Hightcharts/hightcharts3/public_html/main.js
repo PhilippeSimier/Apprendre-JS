@@ -1,9 +1,3 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 var chart;
 var couleurs = ["#1f77b4",  "#aec7e8",  "#ff7f0e",  "#ffbb78",  "#2ca02c"];
 var options = {};

@@ -18,10 +18,8 @@ function obtenirValeur() {
     
 	$bdd = connexionBD();
 	
-	$requete = $bdd->prepare("SELECT * FROM `prixEssence`;");
-	$requete->execute() or die (print_r($requete->errorInfo()));
-	
-	
+	$requete = $bdd->query("SELECT * FROM `prixEssence`;");
+		
     $gasoil  = array();
     $super95 = array();
     $super98 = array();

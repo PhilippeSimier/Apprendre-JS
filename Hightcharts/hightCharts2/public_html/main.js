@@ -5,7 +5,6 @@ var options = {};
  
 options.chart = {
   renderTo: 'essenceChart',
-  //width: 650,
   height: 500,
   marginTop: 70,
   marginLeft: 100,
@@ -15,7 +14,7 @@ options.chart = {
 };
  
 options.credits = {
-  enabled: false
+  text: '© SNIR Soft Touchard Le Mans'
 };
  
 options.colors = couleurs;
