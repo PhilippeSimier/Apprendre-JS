@@ -14,9 +14,9 @@ function connexionBD() {
     return $bdd;
 }
 
-function obtenirValeur() {
+function obtenirValeur($bdd) {
     
-	$bdd = connexionBD();
+	//$bdd = connexionBD();
 	
 	$requete = $bdd->query("SELECT * FROM `prixEssence`;");
 	
@@ -37,6 +37,6 @@ function obtenirValeur() {
 
 header("Access-Control-Allow-Origin: *");
 header('Content-type: application/json');
-obtenirValeur();
+obtenirValeur(connexionBD());
 
 ?>
