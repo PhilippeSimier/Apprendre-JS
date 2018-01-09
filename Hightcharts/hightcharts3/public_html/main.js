@@ -73,8 +73,9 @@ options.plotOptions = {
         }
 };
 
+// https://philippes.ddns.net/exo/prixEssenceBis.php
 
-$.getJSON('https://philippes.ddns.net/exo/prixEssenceBis.php', function(valeurs) {
+$.getJSON('http://172.18.58.15/~psimier/EssencePhp/prixEssenceBis.php', function(valeurs) {
     
     options.series = valeurs.series;
     options.plotOptions.series.pointStart = valeurs.pointStart;
