@@ -4,17 +4,17 @@ require_once("config.inc.php");
 
 function connexionBD() {
     try 
-	{
+    {
         $bdd = new PDO('mysql:host=' . SERVEURBD . ';dbname=' . NOMDELABASE, LOGIN, MOTDEPASSE);
     } 
-	catch (Exception $ex) 
-	{
+    catch (Exception $ex) 
+    {
         die('<br />Pb connexion serveur BD : ' . $ex->getMessage());
     }
     return $bdd;
 }
 
-function obtenirValeur($bdd) {
+function obtenirValeurJSON($bdd) {
     
 	//$bdd = connexionBD();
 	
@@ -32,11 +32,12 @@ function obtenirValeur($bdd) {
 		$valeurs[$ligne['annee']] = $prix;	
 				
 	}
-	echo json_encode($valeurs, JSON_FORCE_OBJECT);
+	return json_encode($valeurs, JSON_FORCE_OBJECT);
 }
 
 header("Access-Control-Allow-Origin: *");
 header('Content-type: application/json');
-obtenirValeur(connexionBD());
+
+echo obtenirValeurJSON(connexionBD());
 
 ?>

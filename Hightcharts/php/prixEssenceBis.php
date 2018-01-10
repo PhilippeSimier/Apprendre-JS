@@ -14,14 +14,14 @@ function connexionBD() {
     return $bdd;
 }
 
-function obtenirValeur($bdd) {
+function obtenirValeurJSON($bdd) {
     
-	$requete = $bdd->query("SELECT * FROM `prixEssence`;");
+    $requete = $bdd->query("SELECT * FROM `prixEssence`;");
 		
     $gasoil  = array();
     $super95 = array();
     $super98 = array();
-	$brent   = array();	
+    $brent   = array();	
 	
 	while ($ligne = $requete->fetch()) {
 		
@@ -62,11 +62,11 @@ function obtenirValeur($bdd) {
 	$valeurs['pointStart'] =  1995;
 	$valeurs['series'] = $series;
 	
-	echo json_encode($valeurs);
+	return json_encode($valeurs);
 }
 
 header("Access-Control-Allow-Origin: *");
 header('Content-type: application/json');
-obtenirValeur(connexionBD());
 
-?>
+echo obtenirValeurJSON(connexionBD());
+
