@@ -16,7 +16,7 @@ $(document).ready(function() {
 
  $.afficherCourbe = function(couleurs, data, type, to) {
  
- var option = {
+ var options = {
       chart: {
          renderTo: to,
          width: 600,
@@ -69,7 +69,7 @@ $(document).ready(function() {
       }]
    };
      
-   var chart = new Highcharts.Chart(option);
+   var chart = new Highcharts.Chart(options);
  
  };
  
