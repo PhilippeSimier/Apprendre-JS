@@ -16,15 +16,15 @@ function connexionBD() {
 
 function obtenirValeur($bdd) {
     
-	$reponse = $bdd->query("SELECT `nom_en_gb` FROM `pays`;");
+	$reponse = $bdd->query("SELECT `nom_fr_fr` FROM `pays`  WHERE `nom_fr_fr` LIKE '". strtoupper($_GET['nomPays'])."%'" );
 	
 	$data = array();
 	
 	while ($ligne = $reponse->fetch()) {
             
-            array_push($data, $ligne['nom_en_gb']);
+            array_push($data, utf8_encode ($ligne['nom_fr_fr']));
 	}
-	
+	// var_dump($data);
 	echo json_encode($data);
 }
 
