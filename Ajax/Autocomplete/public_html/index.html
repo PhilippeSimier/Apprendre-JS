@@ -2,48 +2,18 @@
 
 <html>
     <head>
-        <title>Autocomplete</title>
+        <title>Champ Auto-complété</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script type='text/javascript' src='main.js'></script>
-        
-        <style>
-            .recherche_pays{
-                border: 1px solid #a8d4b1;
-                background-color: #c6f7d0;
-                margin: 2px 0px;
-                padding: 40px;
-                border-radius: 4px;
-                width: 250px;
-            }
-            #suggestions{
-                float: left;
-                list-style: none;
-                margin-top: -16px;
-                padding: 0;
-                width: 179px;
-                position: absolute;
-                margin-left: -39px;
-            }
-            #suggestions li{
-                padding: 10px;
-                background: #f0f0f0;
-                border-bottom: #bbb9b9 1px solid;
-                list-style-type: none;
-            }
-            #suggestions li:hover{
-                background: #ece3d2;
-                cursor: pointer;
-            }
-        </style>
+        <link href="autocomplete.css" rel="stylesheet" type="text/css"/>
     </head>
     
     <body>
-        <div>AutoComplete</div>
-        <div class="recherche_pays">
-            <input type="text" id="rechercher" placeholder="Nom pays">
+        <div>Champ auto-complété</div>
+        <div class="recherche">
+            <input type="text" id="rechercher" placeholder="Pays">
             <div id="suggestions"></div>
         </div>
     </body>
