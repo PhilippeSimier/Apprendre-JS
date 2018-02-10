@@ -2,20 +2,20 @@
 $(document).ready(function(){
     
     $("#rechercher").keyup(function(){
-        if($(this).val().length >= 1){
+        if($(this).val().length >= 1){  // si au moins un caractère est saisi
             $.ajax({
 		type: "GET",
 		url: "https://philippes.ddns.net/exo/Ajax/pays.php",
-		data:'nomPays='+$(this).val(),
+		data:'nomPays=' + $(this).val(),
 		beforeSend: function(){
-			$("#rechercher").css("background","#FFF url(LoaderIcon.gif) no-repeat 165px");
+			$("#rechercher").css("background","#FFF url(LoaderIcon.gif) no-repeat 30px");
 		},
-		success: function(data){
+		success: function(dataJson){
 			
                         $("#suggestions").show();
-                        // fonction transforme JSON en liste html
-                        dataListe = transformation(data);
-			$("#suggestions").html(dataListe);
+                        // les données reçues sont transformées au format html
+                        dataHtml = transformation(dataJson);
+			$("#suggestions").html(dataHtml);
 			$("#rechercher").css("background","#FFF");
 		}
             });    
@@ -24,15 +24,17 @@ $(document).ready(function(){
     });
 });
 
-function transformation(data){
+// Cette fonction transforme un liste au format JSON
+// en liste au format HTML
+function transformation(dataJson){
     
-    dataliste = '<ul id="listePays">';
-    for (var i = 0; i < data.length ; i++) {
-        dataliste += '<li onClick="select(\'' + data[i] + '\');">' + data[i] + '</li>';
+    dataHtml = '<ul id="listePays">';
+    for (var i = 0; i < dataJson.length ; i++) {
+        dataHtml += '<li onClick="select(\'' + dataJson[i] + '\');">' + dataJson[i] + '</li>';
     }
-    dataliste += '</ul>';
-    console.log(dataliste);
-    return dataliste;
+    dataHtml += '</ul>';
+    console.log(dataHtml);
+    return dataHtml;
 }
 
 function select(val) {
