@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="digicode.css">
+        <script src="digicode.js"></script>
+        
+		
+        <title>Digicode</title>
+    </head>
+	
+    <body>
+        <div id="container" class="container">
+		    <section class="row">
+				<section class="col-sm-6" style="padding:15px;">
+					<div  id="digicode">
+						
+						<input type="text" id="number" value="" autocomplete="off" disabled />
+						
+						<div id="clavier">
+							
+							<div class="row">
+								<button type="button" class="btn nb">1</button>
+								<button type="button" class="btn nb">2</button>
+								<button type="button" class="btn nb">3</button>
+							</div>
+							
+							<div class="row">					
+								<button type="button" class="btn nb">4</button>
+								<button type="button" class="btn nb">5</button>
+								<button type="button" class="btn nb">6</button>
+							</div>
+							
+							<div class="row">
+								<button type="button" class="btn nb">7</button>
+								<button type="button" class="btn nb">8</button>
+								<button type="button" class="btn nb">9</button>
+							</div>
+							<div class="row">
+								<button type="button" class="btn op">A</button>
+								<button type="button" class="btn nb">0</button>
+								<button type="button" class="btn op">C</button>
+							</div>		
+						</div>
+					</div>
+					<div class="col-sm-8">
+						le digicode
+					</div>
+				</section>
+				<section class="col-sm-6" style="padding:15px;">
+					<img id="porte" src="porte_fermee.png">
+				</section>
+			</section>
+        </div>
+        
+    </body>
+</html>

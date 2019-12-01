@@ -35,7 +35,8 @@ qu'il transforme en liste html
 
 
 > - Licence : **licence publique générale** ![enter image description here](https://img.shields.io/badge/licence-GPL-green.svg)
-> - Auteur **Philippe SIMIER** 
+> - Auteur **Philippe SIMIER**
+>  ![enter image description here](https://img.shields.io/badge/built-passing-green.svg)
 <!-- TOOLBOX 
 
 Génération des badges : https://shields.io/
