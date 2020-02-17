@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Filtrage SMA</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="http://blacklabel.github.io/indicators/css/styles.css" />
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	
+        <script src="//code.highcharts.com/stock/highstock.src.js"></script>
+        <script src="//code.highcharts.com/stock/modules/exporting.js"></script>
+        <script src="jscripts/indicateurs.js"></script>
+        <script src="jscripts/sma.js"></script>
+        
+        <script>
+            $(function() {
+
+  var adv_options = {
+    chart: {
+      borderWidth: 5,
+      borderColor: '#e8eaeb',
+      borderRadius: 0,
+      backgroundColor: '#f7f7f7'
+    },
+    legend: {
+        enabled: true
+    },
+    
+    indicators: [{
+      id: 'AAPL',
+      type: 'sma',
+      showInLegend: true,
+      params: {
+        period: 14,
+        decimals:1
+      },
+      styles: {
+        stroke: "#7cb5ec",
+      }
+    }],
+    yAxis: {
+      opposite: false,
+      title: {
+        text: 'SMA',
+        x: -4
+      },
+      lineWidth: 2,
+      labels: {
+        x: 22
+      }
+    },
+    rangeSelector: {
+      selected: 0
+    },
+    tooltip: {
+      enabledIndicators: true
+    },
+    series: [{
+      cropThreshold: 0,
+      id: 'AAPL',
+      name: 'AAPL',
+      data: [],
+      tooltip: {
+        valueDecimals: 2
+      }
+    }]
+  };
+
+  $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {
+
+    adv_options.series[0].type = 'spline';
+    adv_options.series[0].data = data;
+
+    $('#container-advanced').highcharts('StockChart', adv_options, function() {
+      var chart = this;
+      $('#btn').one('click', function() {
+        var options = chart.options;
+        options.indicators.push({
+          id: 'AAPL',
+          type: 'ema',
+          params: {
+            period: 14
+          },
+          styles: {
+            stroke: 'green'
+          }
+          
+        });
+        
+        $('#container-advanced').highcharts('StockChart', options);
+      });
+    });
+  });
+});
+    
+        </script>    
+    </head>
+    <body>
+        <div id="container-advanced" class="chart" style="height:400px; width: 1000px"></div>
+        <button id="btn">Add indicator</button>
+    </body>
+</html>
