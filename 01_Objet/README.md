@@ -104,6 +104,18 @@ A ce niveau, il faut savoir que tous les objets en JavaScript descendent par dé
 
 Cet objet est l’un des objets JavaScript prédéfinis et permet notamment de créer des objets génériques vides grâce à la syntaxe new Object().
 
+## 3 Utiliser la méthode **create()**
+
+La méthode `Object.create()` crée un nouvel objet avec un prototype donné et des propriétés données.
+```
+var shoe = {size: 6, gender: "women",construction: "slipper"};
+var magicShoe = Object.create(shoe);
+```
+La particularité de Object.create() est que l’argument qui lui est passé (dans notre cas shoe) devient le prototype de notre nouvel objet.
+Si vous affichez le contenu de l’objet magic Shoe, vous verrez qu’il ne contient aucune propriété native, toutes les propriétés qu’il contient sont sous forme de prototype hérité de l’objet shoe.
+
+![console](/01_Objet/console_objet.PNG) 
+
 # Changelog
 
 **08/01/2020 : ** Ajout du README . 
