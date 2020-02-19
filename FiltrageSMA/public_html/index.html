@@ -5,87 +5,91 @@
         <title>Filtrage SMA</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="http://blacklabel.github.io/indicators/css/styles.css" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	
         <script src="//code.highcharts.com/stock/highstock.src.js"></script>
         <script src="//code.highcharts.com/stock/modules/exporting.js"></script>
-        <script src="jscripts/indicateurs.js"></script>
-        <script src="jscripts/sma.js"></script>
+        <script src="//code.highcharts.com/stock/indicators/indicators.js"></script>
+        <script src="//code.highcharts.com/stock/indicators/ema.js"></script>
+
         
         <script>
             $(function() {
 
-  var adv_options = {
-    chart: {
-      borderWidth: 5,
-      borderColor: '#e8eaeb',
-      borderRadius: 0,
-      backgroundColor: '#f7f7f7'
-    },
-    legend: {
-        enabled: true
-    },
-    
-    indicators: [{
-      id: 'AAPL',
-      type: 'sma',
-      showInLegend: true,
-      params: {
-        period: 14,
-        decimals:1
-      },
-      styles: {
-        stroke: "#7cb5ec",
-      }
-    }],
-    yAxis: {
-      opposite: false,
-      title: {
-        text: 'SMA',
-        x: -4
-      },
-      lineWidth: 2,
-      labels: {
-        x: 22
-      }
-    },
-    rangeSelector: {
-      selected: 0
-    },
-    tooltip: {
-      enabledIndicators: true
-    },
-    series: [{
-      cropThreshold: 0,
-      id: 'AAPL',
-      name: 'AAPL',
-      data: [],
-      tooltip: {
-        valueDecimals: 2
-      }
-    }]
-  };
+            var adv_options = {
+                chart: {
+                    borderWidth: 5,
+                    borderColor: '#e8eaeb',
+                    borderRadius: 0,
+                    backgroundColor: '#f7f7f7'
+                },
+                legend: {
+                    enabled: true
+                }, 
+                yAxis: {
+                    opposite: false,
+                    title: {
+                        text: 'SMA'
+                    },
+                    lineWidth: 2,
+                    labels: {
+                        x: 22
+                    }
+                },
+                rangeSelector: {
+                    selected: 2
+                },
+                tooltip: {
+                    borderColor: '#4b85b7',
+                    backgroundColor: '#edf1c8',
+                    valueDecimals: 2,
+                    xDateFormat: '%A %e %B à  %Hh%M',
+                    enabledIndicators: true
+                },
+                plotOptions: {
+                    line: {
+                        gapSize:5
+                    },
+                
+                    series: {
+                        marker: {
+                            radius: 2
+                        },
+		    animation: true
+                    }
+		},
+            series: [
+                {
+                    type: 'spline',
+                    cropThreshold: 0,
+                    id: 'AAPL',
+                    name: 'AAPL',
+                    data: [],
+                },
+                {
+                    type: 'sma',
+                    linkedTo: 'AAPL',
+                    params: {
+                        period: 14
+                    }
+                }    
+            ]
+            };
 
   $.getJSON('http://www.highcharts.com/samples/data/jsonp.php?filename=aapl-ohlcv.json&callback=?', function(data) {
 
-    adv_options.series[0].type = 'spline';
+    
     adv_options.series[0].data = data;
 
     $('#container-advanced').highcharts('StockChart', adv_options, function() {
       var chart = this;
       $('#btn').one('click', function() {
         var options = chart.options;
-        options.indicators.push({
-          id: 'AAPL',
-          type: 'ema',
-          params: {
-            period: 14
-          },
-          styles: {
-            stroke: 'green'
-          }
-          
+        options.series.push({
+            type: 'ema',
+            linkedTo: 'AAPL',
+            params: {
+                period: 14
+            }        
         });
         
         $('#container-advanced').highcharts('StockChart', options);
