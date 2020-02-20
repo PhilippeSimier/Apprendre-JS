@@ -25,7 +25,7 @@ function maFonction(){
 ```
 ![console](/02_Les_prototypes/console0.PNG) 
 
-##1 Ajouter des propriétés héritables
+## 1 Ajouter des propriétés héritables
 
 Nous pouvons donc ajouter des méthodes à un type d’objet particulier que nous pourrons retrouver dans tous les futurs objet de ce « type ». Mais concrètement comment pouvons-nous le faire ? Il nous suffit d’ajouter une propriété héritable dans ce que l’on appelle le **prototype** !
 
