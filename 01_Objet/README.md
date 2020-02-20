@@ -16,7 +16,7 @@ En JavaScript, nous pouvons créer des objets de 4 manières différentes . On v
 ## 1 Déclaration d'un objet littéral
 
 exemple :
-```
+```javascript
 let utilisateur = {
     /*nom, age et mail sont des propriétés de l'objet utilisateur
      *La valeur de la propriété "nom" est un tableau*/
@@ -36,7 +36,7 @@ L'instruction **let** permet de déclarer une variable dont la portée est celle
 ## Accéder aux membres
 
 Pour accéder aux propriétés et aux méthodes d’un objet, on utilise le caractère point . qu’on appelle également un accesseur. On va ici commencer par préciser le nom de l’objet puis l’accesseur puis enfin le membre auquel on souhaite accéder.
-```
+```javascript
 console.log(utilisateur.nom[0]);
 utilisateur.presenter();
 ```
@@ -48,7 +48,7 @@ Une **fonction constructeur** d’objets est une fonction qui va nous permettre 
 Pour construire des objets à partir d’une fonction constructeur, nous allons devoir suivre deux étapes : il va déjà falloir définir notre fonction constructeur et ensuite nous allons appeler ce constructeur avec une syntaxe un peu spéciale utilisant le mot clefs **new**.
 
 L’exemple ici va être de créer une fonction qui va nous permettre de créer des objets possédant les mêmes propriétés nom, age, mail et une méthode presenter() que notre objet littéral.
-```
+```javascript
 function Utilisateur(n, a, m){
     this.nom = n;
     this.age = a;
@@ -87,7 +87,7 @@ Définir des propriétés et des méthodes dans le prototype d’un constructeur
 Pour avoir le code le plus clair et le plus performant possible, nous définirons donc généralement les propriétés des objets (dont les valeurs doivent être spécifiques à l’objet) au sein du constructeur.
 
 exemple :
-```
+```javascript
 function Utilisateur(n, a, m){
     this.nom = n;
     this.age = a;
@@ -96,7 +96,7 @@ function Utilisateur(n, a, m){
 ```
 et les méthodes (que tous les objets vont pouvoir appeler de la même façon) dans le prototype du constructeur.
 
-```
+```javascript
 Utilisateur.prototype.presenter: function(){
         alert('Bonjour, je suis ' + this.nom[0] + ', j\'ai ' + this.age + ' ans');
 ```
@@ -107,7 +107,7 @@ Cet objet est l’un des objets JavaScript prédéfinis et permet notamment de c
 ## 3 Utiliser la méthode **create()**
 
 La méthode `Object.create()` crée un nouvel objet avec un prototype donné et des propriétés données.
-```
+```javascript
 var shoe = {size: 6, gender: "women",construction: "slipper"};
 var magicShoe = Object.create(shoe);
 ```
@@ -118,7 +118,7 @@ Si vous affichez le contenu de l’objet magic Shoe, vous verrez qu’il ne cont
 
 # Changelog
 
-**08/01/2020 : ** Ajout du README . 
+**09/02/2020 : ** Ajout du README . 
 
 > **Notes :**
 
