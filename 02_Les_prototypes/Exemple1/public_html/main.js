@@ -85,3 +85,4 @@ Object.prototype.findOwnerOfProperty = function(propName){
 
 console.log(twister.findOwnerOfProperty("toString"));
 console.log(firstString.findOwnerOfProperty("hasOwnProperty"));
+console.log(twister.findOwnerOfProperty());
