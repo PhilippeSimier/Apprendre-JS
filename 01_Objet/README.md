@@ -13,7 +13,7 @@ En JavaScript, nous pouvons créer des objets de 4 manières différentes . On v
  - Utiliser la méthode **create()**.
 
  
-##1 Déclaration d'un objet littéral
+## 1 Déclaration d'un objet littéral
 
 exemple :
 ```
