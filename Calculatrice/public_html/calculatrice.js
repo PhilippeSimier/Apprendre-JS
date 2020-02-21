@@ -1,11 +1,11 @@
 
-// classe calculatrice
+
 /**  JavaScript utilise une fonction comme constructeur pour définir un objet. 
  * On définit les propriétés et méthodes d'un objet en définissant une fonction 
  * qui sera utilisée par la suite pour construire l'objet souhaité. 
  * Ici, on définit un constructeur calculatrice.**/
 
-function calculatrice()
+function Calculatrice()
 {
     console.log('Nouvel objet calculatrice créé');
     //that contient une référence à  l'objet calculatrice

@@ -22,7 +22,7 @@ function Tornade(category, affectedAreas, windGust){
     this.affectedAreas = affectedAreas;
     this.windGust = windGust;
 };
-// autre écriture var Tornado = function(category, affectedAreas, windGust){...};
+// autre écriture var Tornade = function(category, affectedAreas, windGust){...};
 
 var cities = [ ["Kansas", 46310],["Torpeka",123939],["Lenexa", 49398]];
 var twister = new Tornade("F5",cities,220);
