@@ -1,10 +1,51 @@
 /*
- * @detail Ici, on définit le constructeur Calculatrice.
+ * La Calculatrice 4 opérations
+ * @author Philippe SIMIER SNIR Lycée Touchard Le Mans
+ * @version version 2.0
+ * @description var maCalculatrice = new Calculatrice("calc");
+ *              maCalculatrice.run();
+ * 
+ */
+
+/*
+ * @detail Constructeur Calculatrice.
+ * @param {type} contenair
  * @returns {Calculatrice}
  */
 
 function Calculatrice(contenair)
 {
+    $("#"+contenair).html('<input type="text" id="number" value="0" autocomplete="off" disabled />'	    
+                +'<div id="clavier">'
+                +'	<div class="row">'
+		+'          <button type="button" class="btn nb">7</button>'
+		+'          <button type="button" class="btn nb">8</button>'
+		+'	    <button type="button" class="btn nb">9</button>'
+		+'	    <button type="button" class="btn op">/</button>'
+		+'	</div>'
+		+'	<div class="row">'					
+		+'	    <button type="button" class="btn nb">4</button>'
+		+'	    <button type="button" class="btn nb">5</button>'
+		+'	    <button type="button" class="btn nb">6</button>'
+		+'	    <button type="button" class="btn op">*</button>'
+		+'	</div>'
+		+'	<div class="row">'
+		+'	    <button type="button" class="btn nb">1</button>'
+		+'	    <button type="button" class="btn nb">2</button>'
+		+'	    <button type="button" class="btn nb">3</button>'
+		+'	    <button type="button" class="btn op">-</button>'
+		+'	</div>'
+		+'	<div class="row">'
+		+'	    <button type="button" class="btn nb">0</button>'
+		+'	    <button type="button" class="btn nb">.</button>'
+		+'	    <button type="button" class="btn op">=</button>'
+		+'	    <button type="button" class="btn op">+</button>'
+		+'	</div>'	
+                +'        <div class="row">'
+		+'	    <button type="button" class="btn double" id="clear">CL</button>'
+                +'            <button type="button" class="btn double" id="correction">&larr;</button>'	
+		+'	</div>'	
+                +'    </div>');
     // la calculatrice est composée d'un objet écran        
     this.ecran = $("#"+contenair+" input#number");
     // et d'un objet clavier qui est lui même composé de boutons        
@@ -14,7 +55,7 @@ function Calculatrice(contenair)
     this.correc = $("#"+contenair+" #correction");
 }
 
-// la méthode run 
+// la méthode run connecte les évènements (click) aux methodes
 Calculatrice.prototype.run = function ()
 {
     //laCalculatrice contient une référence à  l'objet Calculatrice
