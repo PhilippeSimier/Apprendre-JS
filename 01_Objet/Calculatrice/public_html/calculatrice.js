@@ -53,6 +53,7 @@ function Calculatrice(contenair)
     this.operateurs = $("#"+contenair+" #clavier .op");
     this.clear = $("#"+contenair+" #clear");
     this.correc = $("#"+contenair+" #correction");
+    this.run();
 }
 
 // la méthode run connecte les évènements (click) aux methodes
