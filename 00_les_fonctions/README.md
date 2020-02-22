@@ -9,6 +9,7 @@ Dans le cas d’une fonction déclarée de manière classique, toute la fonction
 ## La déclaration de fonction
 Il y a plusieurs façons de définir des fonctions.
 Avec une instruction qui commence par le mot clé `function` 
+
 **Exemple 1**
 ```javascript
 function kingOfCool() {
@@ -37,6 +38,7 @@ L'un des bénéfices d'utiliser une expression de fonction nommée est que son n
 ## Une fonction comme paramètre d'une fonction
 
 Le paramètre d'une fonction peut être une fonction puisqu'une fonction est un objet.
+
 **Exemple 4 - avec une fonction de la librairie jQuery**
 ```javascript
 $("#element4").on('click', maFonctionAnonyme);
