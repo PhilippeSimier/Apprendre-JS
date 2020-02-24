@@ -9,17 +9,14 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="/Ruche/scripts/bootstrap.min.js"></script> 
     <link rel="stylesheet" href="/Ruche/css/ruche.css" />
-    
-    
+
 
     <script src="//code.highcharts.com/stock/highstock.js"></script>
     <script src="//code.highcharts.com/stock/modules/data.js"></script>
     <script src="//code.highcharts.com/stock/modules/exporting.js"></script>
-    
-    	<script src="//blacklabel.github.io/indicators/js/indicators.js"></script>
-        <script src="//blacklabel.github.io/indicators/js/sma.js"></script>
-        <script src="//blacklabel.github.io/indicators/js/ema.js"></script>
-        <script src="//blacklabel.github.io/indicators/js/rsi.js"></script>
+    <script src="//code.highcharts.com/stock/indicators/indicators.js"></script>
+    <script src="//code.highcharts.com/stock/indicators/ema.js"></script>
+    	
     <script type="text/javascript">
       
       
@@ -61,18 +58,20 @@
     // Ensuite, l'utilisateur peut cliquer sur le nom de la série dans la légende 
     // pour afficher les séries qui l'interessent.      
     function HideAll(){
+		console.log(dynamicChart.indicators.allItems);
+		dynamicChart.indicators.allItems[0].setVisible(false);	
         for (var index=0; index<dynamicChart.series.length; index++)  
         { 
             if (dynamicChart.series[index].name == 'Navigator')
                 continue;
 	    dynamicChart.series[index].hide();
-        }          
+        }	
     }
     
     // Fonction pour activer l'affichage lissé  filtre algorithme SMA
     function sma(){
             nb = dynamicChart.series[0].data.length;         
-            console.log(dynamicChart.options.indicators[0].id); 
+            console.log(dynamicChart); 
             
     } 
     
@@ -80,7 +79,7 @@
 $(document).ready(function(){
     
     //Ajout Channel dans le menu load
-    var menu=document.getElementById("Channel Select");
+    var menu = document.getElementById("Channel Select");
     for (var channelIndex=0; channelIndex<channelKeys.length; channelIndex++)  // pour chaque canal
     {
 	   console.log('Name',channelKeys[channelIndex].name);
@@ -155,6 +154,7 @@ $(document).ready(function(){
  
     // création du graphique 
     function createChart() {
+    var couleurs = ['#2f7ed8',  '#8bbc21', '#1aadce', '#c42525', '#0d233a', '#910000', '#492970', '#f28f43', '#77a1e5', '#a6c96a'];		
 	// spécification des options du graphique
 	var chartOptions = {
 	chart: 
@@ -163,7 +163,7 @@ $(document).ready(function(){
 		zoomType:'y',
 		events: 
 		{
-                    load: function() {
+            load: function() {
 				
 			// si la checkbox update  est cochée,toutes les 60 secondes,
                         //  charge la dernière valeur pour l'ajouter au graphique
@@ -233,6 +233,7 @@ $(document).ready(function(){
 			    marker: {
 				radius: 2
 				},
+				showInLegend: true,
 				animation: true,
 				step: false,
 				turboThrehold:1000,
@@ -245,7 +246,7 @@ $(document).ready(function(){
 			backgroundColor: '#edf1c8',
 			valueDecimals: 2,
 			xDateFormat: '%A %e %B à  %Hh%M',
-                        enabledIndicators: true
+            enabledIndicators: true
 			
 		},
 		xAxis: {
@@ -261,15 +262,15 @@ $(document).ready(function(){
 			}
 		},
 		yAxis: [{
-                    className: 'highcharts-color-0',
+            className: 'highcharts-color-0',
 		    title: {
-                        text: '' 
+                    text: '' 
 	              
                     },
 		    opposite: false,
                     id: 'P'
 		}, {
-                    className: 'highcharts-color-1',
+            className: 'highcharts-color-1',
 		    title: {
                         text: ''
                     },
@@ -288,24 +289,14 @@ $(document).ready(function(){
 		navigator: {
 		    baseSeries: 0,  //select which series to show in history navigator, First series is 0
 		    series: {
-                        includeInCSVExport: false
+                includeInCSVExport: false
 		    }
 		},
 		credits:{
 			href: "http://touchardinforeseau.servehttp.com/Ruche",
 			text: "Section SNIR Touchard"
 		},
-                indicators: [{
-                    id: 'first',
-                    type: 'sma',
-                    showInLegend: true,
-                    params: {
-                        period: 48
-                    },
-                    styles: {
-                        stroke: 'blue',
-                    }
-                }],        
+                
 		series: []    
 	};
 	
@@ -316,7 +307,7 @@ $(document).ready(function(){
 	    shortMonths: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil','Août', 'Sept', 'Oct', 'Nov', 'Déc'],
             decimalPoint: ',',
             resetZoom: 'Reset zoom',
-            resetZoomTitle: 'Reset zoom Ã  1:1',
+            resetZoomTitle: 'Reset zoom à  1:1',
 	    downloadPNG: "Télécharger au format PNG image",
             downloadJPEG: "Télécharger au format JPEG image",
             downloadPDF: "Télécharger au format PDF document",
@@ -334,14 +325,38 @@ $(document).ready(function(){
   {
     for (var fieldIndex=0; fieldIndex<channelKeys[channelIndex].fieldList.length; fieldIndex++)  // add each field
     {
-      console.log('Channel '+channelIndex+' field '+fieldIndex);
-      chartOptions.series.push({data:channelKeys[channelIndex].fieldList[fieldIndex].data,
+   
+	    console.log('Channel '+channelIndex+' field '+fieldIndex);
+		var nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
+		var nameSerieSMA = nameSerie + ' SMA';
+		var id = 'ID' + fieldIndex;
+		
+        chartOptions.series.push({data:channelKeys[channelIndex].fieldList[fieldIndex].data,
                                 index:channelKeys[channelIndex].fieldList[fieldIndex].series,
                                 yAxis:channelKeys[channelIndex].fieldList[fieldIndex].axis,
                                 type: 'spline',
-                                id: 'first',
-                                name: channelKeys[channelIndex].fieldList[fieldIndex].name});
-    }
+                                id: id,
+								color: couleurs[fieldIndex],
+                                name: nameSerie});
+		chartOptions.series.push({
+								yAxis:channelKeys[channelIndex].fieldList[fieldIndex].axis,
+								type: 'sma',
+								linkedTo: id,
+								opacity: 0.6,
+								dashStyle: 'ShortDash',
+								name: nameSerieSMA,
+								color: couleurs[fieldIndex],
+								showInLegend: true,
+								marker:{
+									enabled: false
+								},
+								params: {
+									period: 48
+									}
+								});						
+	}
+    
+	
   }
 	// set chart labels here so that decoding occurs properly
 	//chartOptions.title.text = data.channel.name;
