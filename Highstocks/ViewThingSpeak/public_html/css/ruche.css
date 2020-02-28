@@ -1,0 +1,12 @@
+/* 
+    Created on : 27 févr. 2020, 09:25:15
+    Author     : Philippe SIMIER Lycée Touchard
+*/
+
+.popin {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 20px #999;
+    padding: 10px;
+    margin: 10px;
+}
