@@ -12,23 +12,25 @@
  * @version 2.0  du 27/02/2020
  */
 
+"use strict";
+
 // placez votre numéro de canal ThingSpeak, et votre clé d'API ici.
-var channelKeys = [
+let channelKeys = [
     {channelNumber: 752839,
         key: '',
         fieldList: [{field:1,axis:'P'},{field:2,axis:'O'}]
     }
 ];
 
-var dynamicChart;
-var channelsLoaded = 0;
+let dynamicChart;
+let channelsLoaded = 0;
 
 /*
  * décalage horaire de l'utilisateur
  * myOffset contient la différence en minutes 
  * entre le fuseau horaire UTC, et celui de l'heure locale.
  */
-var myOffset = new Date().getTimezoneOffset();
+let myOffset = new Date().getTimezoneOffset();
 
 /**
  * fonction pour convertir le format de date
@@ -45,16 +47,16 @@ function getChartDate(d) {
  */
 $(document).ready(function () {
 
-    // La variable menu est un selecteur qui permet de choisir un canal
-    var menu = document.getElementById("Channel_Select");
-    var last_date; // variable pour la dernière date du data dans le chart
+    // La letiable menu est un selecteur qui permet de choisir un canal
+    let menu = document.getElementById("Channel_Select");
+    let last_date; // letiable pour la dernière date du data dans le chart
 
     // Création d'un attribut series pour chaque fieldList
     // Cet attribut nommé series contient le numéro de la série
-    var seriesCounter = 0;
-    for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
+    let seriesCounter = 0;
+    for (let channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
     {
-        for (var fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  // pour chaque champ du canal
+        for (let fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  // pour chaque champ du canal
         {
             channelKeys[channelIndex].fieldList[fieldIndex].series = seriesCounter;
             seriesCounter++;
@@ -62,7 +64,7 @@ $(document).ready(function () {
     }
     // appels pour charger les données de chaque canal dans le tableau channelKeys maintenant
     // dessine le graphique quand toutes les données sont chargées, later asyncronously add history
-    for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
+    for (let channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
     {
         channelKeys[channelIndex].loaded = false;
         loadThingSpeakChannel(channelIndex, channelKeys[channelIndex].channelNumber, channelKeys[channelIndex].key, channelKeys[channelIndex].fieldList);
@@ -83,14 +85,14 @@ $(document).ready(function () {
                 $('#chart-container').append('This channel is not public.  To embed charts, the channel must be public or a read key must be specified.');
                 console.log('Thingspeak Data Loading Error');
             }
-            for (var fieldIndex = 0; fieldIndex < fieldList.length; fieldIndex++)  // iterate through each field
+            for (let fieldIndex = 0; fieldIndex < fieldList.length; fieldIndex++)  // iterate through each field
             {
                 fieldList[fieldIndex].data = []; // creation  
-                for (var h = 0; h < data.feeds.length; h++)  // iteration pour chaque data
+                for (let h = 0; h < data.feeds.length; h++)  // iteration pour chaque data
                 {
-                    var p = [];  //nouveau Highcharts.Point();
-                    var fieldStr = "data.feeds[" + h + "].field" + fieldList[fieldIndex].field;
-                    var v = eval(fieldStr);
+                    let p = [];  //nouveau Highcharts.Point();
+                    let fieldStr = "data.feeds[" + h + "].field" + fieldList[fieldIndex].field;
+                    let v = eval(fieldStr);
                     p[0] = getChartDate(data.feeds[h].created_at);
                     p[1] = parseFloat(v);
                     // Ajout au tableau data si la valeur est numérique 
@@ -106,7 +108,7 @@ $(document).ready(function () {
             // Titre de la page
             document.title = data.channel.name;
 
-            var menuOption = new Option(channelKeys[channelIndex].name, channelIndex);
+            let menuOption = new Option(channelKeys[channelIndex].name, channelIndex);
             menu.options.add(menuOption, channelIndex);
 
             channelKeys[channelIndex].fieldList = fieldList;
@@ -129,26 +131,26 @@ $(document).ready(function () {
      * charge la dernière valeur pour l'ajouter au graphique
      * @returns {undefined}
      */
-    var latency = function () {
+    let latency = function () {
         setInterval(function () {
             if (document.getElementById("Update").checked)
             {
-                for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // iterate through each channel
+                for (let channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // iterate through each channel
                 {
                     (function (channelIndex)
                     {
                         // get the data with a webservice call
                         $.getJSON('https://www.thingspeak.com/channels/' + channelKeys[channelIndex].channelNumber + '/feed/last.json?callback=?&amp;offset=0&amp;location=false;key=' + channelKeys[channelIndex].key, function (data)
                         {
-                            for (var fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)
+                            for (let fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)
                             {
                                 // if data exists
-                                var fieldStr = "data.field" + channelKeys[channelIndex].fieldList[fieldIndex].field;
-                                var chartSeriesIndex = channelKeys[channelIndex].fieldList[fieldIndex].series;
+                                let fieldStr = "data.field" + channelKeys[channelIndex].fieldList[fieldIndex].field;
+                                let chartSeriesIndex = channelKeys[channelIndex].fieldList[fieldIndex].series;
                                 if (data && eval(fieldStr))
                                 {
-                                    var p = []; //nouveau Highcharts.Point();
-                                    var v = eval(fieldStr);
+                                    let p = []; //nouveau Highcharts.Point();
+                                    let v = eval(fieldStr);
                                     p[0] = getChartDate(data.created_at);
                                     p[1] = parseFloat(v);
                                     // Obtenir la dernière date dans le tableau des data
@@ -156,7 +158,7 @@ $(document).ready(function () {
                                     {
                                         last_date = dynamicChart.series[chartSeriesIndex].data[dynamicChart.series[chartSeriesIndex].data.length - 1].x;
                                     }
-                                    var shift = false; //default for shift
+                                    let shift = false; //default for shift
                                     // si la valeur est numérique et que c'est une nouvelle date on l'ajoute 
                                     if (!isNaN(parseInt(v)) && (p[0] !== last_date))
                                     {
@@ -174,9 +176,9 @@ $(document).ready(function () {
 
     // création du graphique 
     function createChart() {
-        var couleurs = ['#2f7ed8', '#8bbc21', '#1aadce', '#c42525', '#0d233a', '#910000', '#492970', '#f28f43', '#77a1e5', '#a6c96a'];
+        let couleurs = ['#2f7ed8', '#8bbc21', '#1aadce', '#c42525', '#0d233a', '#910000', '#492970', '#f28f43', '#77a1e5', '#a6c96a'];
         // spécification des options du graphique
-        var chartOptions = {
+        let chartOptions = {
             chart: {
                 renderTo: 'chart-container',
                 zoomType: 'y',
@@ -223,7 +225,7 @@ $(document).ready(function () {
             xAxis: {
                 type: 'datetime',
                 ordinal: false,
-                min: Date.UTC(2017, 02, 28),
+                min: Date.UTC(2017, 2, 28),
                 dateTimeLabelFormats: {
                     hour: '%H',
                     minute: '%H:%M'
@@ -292,15 +294,15 @@ $(document).ready(function () {
         // ajoute le titre au graphique
         chartOptions.title.text = channelKeys[0].name;
         // ajoute toutes les données des channels au graphique (chart)
-        for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque channel
+        for (let channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque channel
         {
             // pour chaque champs création des séries
-            for (var fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  // pour chaque champs
+            for (let fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  // pour chaque champs
             {
 
                 console.log('Channel ' + channelIndex + ' field ' + fieldIndex);
-                var nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
-                var id = 'ID' + fieldIndex + channelIndex * 10;
+                let nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
+                let id = 'ID' + fieldIndex + channelIndex * 10;
 
                 chartOptions.series.push({
                     data: channelKeys[channelIndex].fieldList[fieldIndex].data,
@@ -313,11 +315,11 @@ $(document).ready(function () {
                 
             }
             // pour chaque champs création des séries EMA
-            for (var fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  
+            for (let fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  
             {
-                var nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
-                var nameSerieSMA = nameSerie + ' Ema';
-                var id = 'ID' + fieldIndex + channelIndex * 10;
+                let nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
+                let nameSerieSMA = nameSerie + ' Ema';
+                let id = 'ID' + fieldIndex + channelIndex * 10;
                 chartOptions.series.push({
                     yAxis: channelKeys[channelIndex].fieldList[fieldIndex].axis,
                     type: 'ema',
@@ -350,7 +352,7 @@ $(document).ready(function () {
         // ajoute l'historique
 
         console.log('Nb de Channels: ', channelKeys.length);
-        for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
+        for (let channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
         {
             console.log('channelIndex: ', channelIndex);
             loadChannelHistory(channelIndex, channelKeys[channelIndex].channelNumber, channelKeys[channelIndex].key, channelKeys[channelIndex].fieldList, 0, 1);
@@ -363,7 +365,7 @@ $(document).ready(function () {
      */
     $("#hideAll").click(function () {
         console.log("Hide all");
-        for (var index = 0; index < dynamicChart.series.length; index++)
+        for (let index = 0; index < dynamicChart.series.length; index++)
         {
             if (dynamicChart.series[index].name !== 'Navigator 1') {
                 dynamicChart.series[index].hide();
@@ -381,9 +383,9 @@ $(document).ready(function () {
      */
     $("#loadMore").click(function loadOneChannel() {
         // load a channel selected in the popUp menu.
-        var selectedChannel = document.getElementById("Channel_Select");
-        var maxLoads = document.getElementById("Loads").value;
-        var channelIndex = selectedChannel.selectedIndex;
+        let selectedChannel = document.getElementById("Channel_Select");
+        let maxLoads = document.getElementById("Loads").value;
+        let channelIndex = selectedChannel.selectedIndex;
         loadChannelHistory(channelIndex, channelKeys[channelIndex].channelNumber, channelKeys[channelIndex].key, channelKeys[channelIndex].fieldList, 0, maxLoads);
     }
     );
@@ -397,13 +399,13 @@ function loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoad
     dynamicChart.showLoading("Loading History...");
 
     // Recherche de la première date du graphique
-    var first_Date = new Date();
-    var i = 0;
+    let first_Date = new Date();
+    let i = 0;
     for (i = 0; i < fieldList.length; i++) {
         if (typeof fieldList[i].data[0][0] !== "undefined")
             first_Date.setTime(fieldList[i].data[0][0]);
     }
-    var end = first_Date.toJSON();
+    let end = first_Date.toJSON();
     console.log('earliest date :', end);
     console.log('channelIndex :', channelIndex);
     console.log('numLoads :', numLoads);
@@ -415,13 +417,13 @@ function loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoad
             $('#chart-container').append('This channel is not public.  To embed charts, the channel must be public or a read key must be specified.');
             console.log('Thingspeak Data Loading Error');
         }
-        for (var fieldIndex = 0; fieldIndex < fieldList.length; fieldIndex++)  // iterate through each field
+        for (let fieldIndex = 0; fieldIndex < fieldList.length; fieldIndex++)  // iterate through each field
         {
-            for (var h = 0; h < data.feeds.length; h++)  // iterate through each feed (data point)
+            for (let h = 0; h < data.feeds.length; h++)  // iterate through each feed (data point)
             {
-                var p = []; //new Highcharts.Point();
-                var fieldStr = "data.feeds[" + h + "].field" + fieldList[fieldIndex].field;
-                var v = eval(fieldStr);
+                let p = []; //new Highcharts.Point();
+                let fieldStr = "data.feeds[" + h + "].field" + fieldList[fieldIndex].field;
+                let v = eval(fieldStr);
                 p[0] = getChartDate(data.feeds[h].created_at);
                 p[1] = parseFloat(v);
                 // if a numerical value exists add it
