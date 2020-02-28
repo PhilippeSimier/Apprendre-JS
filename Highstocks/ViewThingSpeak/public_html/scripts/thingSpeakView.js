@@ -16,7 +16,7 @@
 var channelKeys = [
     {channelNumber: 752839,
         key: '',
-        fieldList: [{field: 2, axis: 'P'}]
+        fieldList: [{field:1,axis:'P'},{field:2,axis:'O'}]
     }
 ];
 
@@ -294,21 +294,30 @@ $(document).ready(function () {
         // ajoute toutes les données des channels au graphique (chart)
         for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque channel
         {
+            // pour chaque champs création des séries
             for (var fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  // pour chaque champs
             {
 
                 console.log('Channel ' + channelIndex + ' field ' + fieldIndex);
                 var nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
-                var nameSerieSMA = nameSerie + ' Ema';
                 var id = 'ID' + fieldIndex + channelIndex * 10;
 
-                chartOptions.series.push({data: channelKeys[channelIndex].fieldList[fieldIndex].data,
+                chartOptions.series.push({
+                    data: channelKeys[channelIndex].fieldList[fieldIndex].data,
                     index: channelKeys[channelIndex].fieldList[fieldIndex].series,
                     yAxis: channelKeys[channelIndex].fieldList[fieldIndex].axis,
                     type: 'spline',
                     id: id,
                     color: couleurs[fieldIndex],
                     name: nameSerie});
+                
+            }
+            // pour chaque champs création des séries EMA
+            for (var fieldIndex = 0; fieldIndex < channelKeys[channelIndex].fieldList.length; fieldIndex++)  
+            {
+                var nameSerie = channelKeys[channelIndex].fieldList[fieldIndex].name;
+                var nameSerieSMA = nameSerie + ' Ema';
+                var id = 'ID' + fieldIndex + channelIndex * 10;
                 chartOptions.series.push({
                     yAxis: channelKeys[channelIndex].fieldList[fieldIndex].axis,
                     type: 'ema',
@@ -326,6 +335,7 @@ $(document).ready(function () {
                     }
                 });
             }
+            
 
 
         }
@@ -342,7 +352,7 @@ $(document).ready(function () {
         console.log('Nb de Channels: ', channelKeys.length);
         for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
         {
-            console.log('channelIndex: ', channelIndex);       
+            console.log('channelIndex: ', channelIndex);
             loadChannelHistory(channelIndex, channelKeys[channelIndex].channelNumber, channelKeys[channelIndex].key, channelKeys[channelIndex].fieldList, 0, 1);
         }
     }
@@ -355,9 +365,12 @@ $(document).ready(function () {
         console.log("Hide all");
         for (var index = 0; index < dynamicChart.series.length; index++)
         {
-            if (dynamicChart.series[index].name === 'Navigator')
-                continue;
-            dynamicChart.series[index].hide();
+            if (dynamicChart.series[index].name !== 'Navigator 1') {
+                dynamicChart.series[index].hide();
+            }
+            else{
+                dynamicChart.series[index].show();
+            }
         }
     });
 
@@ -382,7 +395,7 @@ $(document).ready(function () {
 function loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoads, maxLoads) {
     // Affiche le loader sur le graphique
     dynamicChart.showLoading("Loading History...");
-    
+
     // Recherche de la première date du graphique
     var first_Date = new Date();
     var i = 0;
