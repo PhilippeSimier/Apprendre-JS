@@ -342,13 +342,8 @@ $(document).ready(function () {
         console.log('Nb de Channels: ', channelKeys.length);
         for (var channelIndex = 0; channelIndex < channelKeys.length; channelIndex++)  // pour chaque canal
         {
-            console.log('channelIndex: ', channelIndex);
-            //(function (channelIndex)
-            //{
-            //load only 1 set of 8000 points
+            console.log('channelIndex: ', channelIndex);       
             loadChannelHistory(channelIndex, channelKeys[channelIndex].channelNumber, channelKeys[channelIndex].key, channelKeys[channelIndex].fieldList, 0, 1);
-            //}
-            //)(channelIndex);
         }
     }
 
@@ -438,5 +433,3 @@ function loadChannelHistory(channelIndex, channelNumber, key, fieldList, numLoad
 
     });
 }
-
-
