@@ -3,34 +3,47 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="calculatrice.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="calculatrice.css">
         <script src="calculatrice.js"></script>
         <script>
-            $(document).ready(function() {
-                var maCalculatrice1 = new Calculatrice("calc1");
-                var maCalculatrice2 = new Calculatrice("calc2");
+            $(document).ready(function () {
+                $('#autre').click(function () {
+                    $("#ModalCenter").modal('show');
+                    let maCalculatrice = new Calculatrice("#calc2");
+                    //$(this).hide();
+                });
             });
         </script>
-		
+
         <title>Calculatrice</title>
     </head>
-	
+
     <body>
         <div class="container" >
             <section class="row">
-		<div class="col-sm-6">
-                   <div  class="calculatrice" id="calc1"></div> 
-		   Une calculatrice 4 opérations
-		</div>
-                <div class="col-sm-6">
-                   <div  class="calculatrice" id="calc2"></div> 
-		   Une autre calculatrice 4 opérations
-		</div>
-   	    </section>
+                <div class="col-sm-6" >
+                    <button type="button" class="btn" id="autre">Calculatrice</button>
+                </div>
+            </section>
         </div>
-        
+
+        <!--Fenêtre Modal -->
+        <div class="modal" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenter" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body" id="calc2">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Fin de fenêtre Modal -->
+
     </body>
 </html>

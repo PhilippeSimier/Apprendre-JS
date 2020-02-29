@@ -6,6 +6,8 @@ Vous connaissez surement la portée des variables en javascript. Elle est défin
 
 Lorsque vous utilisez le mot-clé **function** pour créer une **fonction dans une fonction**, alors vous êtes en train de créer une **closure**.  L'utilisation des **closures** a surtout lieu quand une fonction transmet une fonction à une autre fonction ou retourne une fonction.
 
+Une closure est une fonction interne qui va « se souvenir » et pouvoir continuer à accéder à des variables définies dans sa fonction parente même après la fin de l’exécution de celle-ci.
+
 Une closure est la pile de mémoire associée à une fonction. Cette pile mémorise les variables locales utilisées par la fonction au moment de sa destruction. Dans la plupart des langages de programmation, lorsque l'exécution d'une fonction se termine, les variables locales de la fonction sont détruites. Ce n'est pas le cas en JavaScript : elles sont sauvegardées dans une closure. 
 
 ## Exemple

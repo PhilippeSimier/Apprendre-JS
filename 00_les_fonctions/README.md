@@ -2,11 +2,11 @@
 
 ## Présentation
 
-JavaScript permet de créer des fonctions que nous pourrons stocker dans des variables. Bienvenue dans le monde des fonctions expression ou en français des expressions en tant que fonctions. Ce concept est indispensable en JavaScript car il est très utilisé, mais pourquoi ? En fait la différence entre fonction déclaré et une fonction expression est lié à la façon dont le navigateur interprète et stock en mémoire ces informations.
+JavaScript permet de créer des **fonctions** que nous pourrons stocker dans des variables. Bienvenue dans le monde des fonctions expression ou en français des expressions en tant que fonctions. Ce concept est indispensable en JavaScript car il est très utilisé, mais pourquoi ? En fait la différence entre fonction déclaré et une fonction expression est lié à la façon dont le navigateur interprète et stock en mémoire ces informations.
 
 Dans le cas d’une fonction déclarée de manière classique, toute la fonction est chargée dans la mémoire du navigateur même si elle n’est pas utilisée immédiatement. À la différence des expressions de fonction (ou fonction expression) qui elles sont appelées quand l’interpréteur atteint cette ligne de code.
 
-## La déclaration de fonction
+## La déclaration d'une fonction
 Il y a plusieurs façons de définir des fonctions.
 Avec une instruction qui commence par le mot clé `function` 
 
@@ -21,19 +21,52 @@ Les instructions qui déclarent des fonctions mais qui ne commencent pas avec le
 **Exemple 2 - Expression de fonction anonyme**
 (il n'y a pas de nom utilisé) 
 ```javascript
-var maFonctionAnonyme = function () {
+let maFonctionAnonyme = function () {
     alert('Message anonyme');
 };
 ```
 Ne pas oublier le **;** à la fin, car cela reste une variable comme une autre.
+Ici, on affecte notre fonction anonyme à une variable **maFonctionAnonyme**.
+Notre variable contient donc ici une valeur complexe qui est une fonction et on va désormais pouvoir l’utiliser comme si c’était la fonction elle-même.
+Pour « invoquer notre fonction» c'est à dire pour exécuter le code de la fonction qu’elle contient, il faut écrire le nom de la variable suivi d’un couple de parenthèses. 
+```javascript
+maFonctionAnonyme();
+```
 
 **Exemple 3 - Expression de fonction nommée**
 ```javascript
-var maFonctionNommee = function monNom() {
+let maFonctionNommee = function monNom() {
     alert('Message de fonction nommée');
 };
 ``` 
 L'un des bénéfices d'utiliser une expression de fonction nommée est que son nom sera utilisé dans la pile d'appel lorsqu'on aura une erreur. Avec le nom de la fonction, il sera plus facile de repérer l'origine de l'erreur.
+l'exécution de la fonction nommée se fait de la même façon que pour une fonction anonyme.
+```javascript
+maFonctionNommee();
+```
+## Auto invoquer une fonction
+Une autre façon d’exécuter une fonction  va être de créer une fonction  qui va s’auto-invoquer c’est-à-dire qui va  s’appeler ou encore s’exécuter elle-même dès sa création.
+
+Pour créer une fonction auto-invoquée à partir d’une fonction, il faut tout simplement  rajouter un couple de parenthèses autour de la fonction et un second couple après le code de la fonction.
+
+Exemple :
+``` javascript
+(function(){
+    alert('rouge');
+})()
+```
+On ne met pas la fonction dans une variable, on l’enferme dans des parenthèses, ce qui permet de garder la référence le temps de l’appeler, puis on l’appelle. 
+On fait la même chose que précédemment , on saute juste l'étape de mémorisation dans une variable.  
+Cependant il faut juste réaliser que le bout de code ci-dessous fait EXACTEMENT la même chose que le bout de code juste au dessus :
+``` javascript
+	alert('rouge');
+```
+**Alors qu'elle peut bien être l'intérêt d'auto-invoquer !!!**
+
+En créant une fonction, on crée un **scope**. Ainsi, tout ce qui est déclaré avec **var** ou **let** dans la fonction sera garanti de ne pas être une variable globale. il n'y aura pas d’effet de bord sur le monde extérieur. Et le monde extérieur n’aura pas accès aux variables déclarées dans la fonction. Par contre la fonction a accès aux variables globales !
+Il est donc **une bonne pratique de mettre TOUT son script dans une fonction qui s’auto-appelle**, pour l’isoler du monde extérieur et ne pas polluer le namespace global. 
+
+Voir l'exemple de calculatrice
 
 ## Une fonction comme paramètre d'une fonction
 
@@ -56,10 +89,12 @@ var table7 = multiplicateur.map(function (arrayCell) {
 
 console.log(table7);
 ```
-##  Une fonction comme paramètre d'une fonction
+##  Une fonction comme retour d'une fonction
 
 On peut retourner une fonction depuis une autre fonction.
 Voir l'exemple promenade dans un parc.
+
+
 
 # Changelog
 
