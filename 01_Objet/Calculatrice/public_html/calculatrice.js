@@ -25,7 +25,9 @@
     function Calculatrice(contenair)
     {
         $(contenair).html('<div  class="calculatrice">'
-                + '<input type="text" id="number" value="0" autocomplete="off" disabled />'
+                + '<div class="row">'
+                + '    <input type="text" id="number" value="0" autocomplete="off" disabled />'
+                + '</div>'
                 + '<div id="clavier">'
                 + '	<div class="row">'
                 + '          <button type="button" class="btn nb">7</button>'
