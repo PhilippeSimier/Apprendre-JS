@@ -1,9 +1,5 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
 /* 
+    Feuille de style pour calculatrice 4 opérations
     Created on : 10 févr. 2018, 18:25:05
     Author     : Philippe SIMIER
 */
@@ -22,7 +18,7 @@ and open the template in the editor.
     text-align: right;
     font-size: 30px;
     padding-right: 10px;
-    margin: 4px;
+    margin: 1%;
 }
 
 .calculatrice .row { 
@@ -48,11 +44,4 @@ and open the template in the editor.
 .calculatrice .double{
     width: 48%;
     background-color: grey;
-}
-
-.modal-dialog{
-    width: 320px;
-}
-.modal-body {
-    padding: 0px;
 }

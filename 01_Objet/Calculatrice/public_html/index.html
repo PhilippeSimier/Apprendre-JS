@@ -9,11 +9,13 @@
         <link rel="stylesheet" type="text/css" href="calculatrice.css">
         <script src="calculatrice.js"></script>
         <script>
-            $(document).ready(function () {
+            
+            $(function () {             
                 $('#autre').click(function () {
-                    $("#ModalCenter").modal('show');
+                    $(".modal-body").css("padding","0px");
+                    $(".modal-dialog").css("width","320px");
                     let maCalculatrice = new Calculatrice("#calc2");
-                    //$(this).hide();
+                    $("#ModalCenter").modal('show');                   
                 });
             });
         </script>
