@@ -78,7 +78,8 @@ $("#element4").on('click', maFonctionAnonyme);
 ```
 Cette instruction permet d'associer l’événement **click** sur l'élément html ayant l'id element4, à la fonction maFonctionAnonyme.
 
-**Exemple 5 **
+**Exemple 5**
+
 Avec la méthode array.map() , pour rappel array.map() permet d’appliquer un traitement à n’importe quelle valeur d’un array (de manière individuelle) et renvoyer cette nouvelle version de l’array.
 ```javascript
 var multiplicateur = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
