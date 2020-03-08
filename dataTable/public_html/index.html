@@ -9,23 +9,32 @@ and open the template in the editor.
         <title>Data Table</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" >
-        
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"/>
+        <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.css"/>
  
 
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <script  src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-        <script src="//cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-
-        <!--<link href="mesStyles.css" rel="stylesheet" type="text/css"/>-->
+        <script src="//cdn.datatables.net/v/bs4/dt-1.10.20/datatables.min.js"></script>
+        <script src="//cdn.datatables.net/plug-ins/1.10.20/i18n/french.json"></script>
+        
+        <link href="mesStyles.css" rel="stylesheet" type="text/css"/>
 
         
         
         <script>
+            let options = {
+                language: {
+                        url: "DataTables/french.json"
+                },
+                pagingType: "simple_numbers",
+                lengthMenu:[5,10,15,20,25],
+                pageLength: 5,
+                order:[[1,'desc'], [0, 'asc']]
+            };
+            
             $(document).ready(function () {
-                $('#example').DataTable();
+                $('#example').DataTable(options);
             });
         </script>
     </head>
